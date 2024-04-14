@@ -68,10 +68,22 @@ public class BodyAccelerationMap {
         return null;
     }
 
+    //old resize deleted data -> passed test but if you add more data you get null pointers
     private void resize(){
-        this.capacity = capacity*2;
-        this.values = new Vector3[capacity*2];
-        this.keys = new Body[capacity*2];
+        int newCapacity = keys.length * 2;
+        Body[] newKeys = new Body[newCapacity];
+        Vector3[] newValues = new Vector3[newCapacity];
+
+        for(int i = 0; i < keys.length; i++) {
+            newKeys[i] = keys[i];
+        }
+
+        for(int i = 0; i < values.length; i++) {
+            newValues[i] = values[i];
+        }
+
+        keys = newKeys;
+        values = newValues;
     }
 
 
