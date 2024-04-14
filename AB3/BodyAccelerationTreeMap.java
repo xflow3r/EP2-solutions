@@ -62,7 +62,11 @@ public class BodyAccelerationTreeMap {
      *  descending order according to the mass of the bodies.
      */
     public String toString() {
-        return root.toString();
+        if (root != null) {
+            return root.toString().substring(0, root.toString().length()-2); //to remove the last ",\n" from the string
+        } else {
+            return "BodyAccelerationTreeMap is empty";
+        }
     }
 }
 
@@ -134,13 +138,16 @@ class TreeNode {
         return null;
     }
 
-    public String toString(){
-        String s = key.toString() + value.toString();
-        if(left != null) {
-            s += left.toString();
-        }
+    public String toString(){ // previous ordering was wrong
+        String s = "";
         if(right != null) {
             s += right.toString();
+        }
+
+        s += key.toString() + value.toString()  + ",\n";
+
+        if(left != null) {
+            s += left.toString();
         }
         return s;
     }
